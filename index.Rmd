@@ -1,0 +1,10 @@
+---
+title: "Newthinker-Jeffrey's website"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+[Resume](https://newthinker-jeffrey.github.io/resume.html)

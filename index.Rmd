@@ -47,16 +47,24 @@ knitr::opts_chunk$set(echo = TRUE)
     
 - 微分几何 （Differential_Geometry）
 
+    - [Ck流形切向量定义](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/Ck流形切向量定义.html)
+
+    - [Frobenius定理和Pfaff方程组](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/Frobenius定理和Pfaff方程组.html)
+
     - [微分形式与协变外导数Exterior_Covariant_Derivative](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/微分形式与协变外导数Exterior_Covariant_Derivative.html)
-
-    - [关于联络与曲率的一些杂记](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/关于联络与曲率的一些杂记.html)
-
-    - [左右不变向量场与在纤维丛中的运用](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/左右不变向量场与在纤维丛中的运用.html)
-
-    - [李群李代数一些有趣的问题](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/李群李代数一些有趣的问题.html)
 
     - [Vector_valued_forms的一些运算](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/Vector_valued_forms的一些运算.html)
 
-    - [Ck流形切向量定义](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/Ck流形切向量定义.html)
+    - [Frölicher_Nijenhuis_bracket和曲率](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/Frölicher_Nijenhuis_bracket_and_Curvature.html)
+
+    - [李群李代数一些有趣的问题](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/李群李代数一些有趣的问题.html)
+
+    - [左右不变向量场与在纤维丛中的运用](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/左右不变向量场与在纤维丛中的运用.html)
+    - [关于联络与曲率的一些杂记](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/关于联络与曲率的一些杂记.html)
+
+
+
+
+
 
 

@@ -1,7 +1,6 @@
 ---
 title: "Newthinker-Jeffrey's website"
 output:
-  pdf_document: default
   html_document: default
 ---
 
@@ -9,4 +8,19 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Resume
+
 [Resume](https://newthinker-jeffrey.github.io/resume.html)
+
+## Blogs
+
+
+[带约束的最优化问题](https://newthinker-jeffrey.github.io/带约束的最优化问题.html)
+
+[等式约束优化问题的求解](https://newthinker-jeffrey.github.io/等式约束优化问题的求解.html)
+
+[粒子滤波](https://newthinker-jeffrey.github.io/粒子滤波.html)
+
+
+
+

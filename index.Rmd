@@ -21,17 +21,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 - 一些 2017 年前写的老文章
 
-    - [粒子滤波](https://newthinker-jeffrey.github.io/粒子滤波.html)
+    - [粒子滤波](https://newthinker-jeffrey.github.io/old_articles_before_2017/粒子滤波.html)
     
-    - [(UKF)_Scaled_Unscented_Transform_变尺度无味变换中的一些技术性推导](https://newthinker-jeffrey.github.io/(UKF)_Scaled_Unscented_Transform_变尺度无味变换中的一些技术性推导.html)
+    - [(UKF)_Scaled_Unscented_Transform_变尺度无味变换中的一些技术性推导](https://newthinker-jeffrey.github.io/old_articles_before_2017/(UKF)_Scaled_Unscented_Transform_变尺度无味变换中的一些技术性推导.html)
     
-    - [带约束的最优化问题](https://newthinker-jeffrey.github.io/带约束的最优化问题.html)
+    - [带约束的最优化问题](https://newthinker-jeffrey.github.io/old_articles_before_2017/带约束的最优化问题.html)
 
-    - [等式约束优化问题的求解](https://newthinker-jeffrey.github.io/等式约束优化问题的求解.html)
+    - [等式约束优化问题的求解](https://newthinker-jeffrey.github.io/old_articles_before_2017/等式约束优化问题的求解.html)
 
-    - [卡尔曼滤波公式推导笔记](https://newthinker-jeffrey.github.io/卡尔曼滤波公式推导笔记.html)
+    - [卡尔曼滤波公式推导笔记](https://newthinker-jeffrey.github.io/old_articles_before_2017/卡尔曼滤波公式推导笔记.html)
 
-    - [更直接的线性卡尔曼公式推导笔记](https://newthinker-jeffrey.github.io/更直接的线性卡尔曼公式推导笔记.html)
+    - [更直接的线性卡尔曼公式推导笔记](https://newthinker-jeffrey.github.io/old_articles_before_2017/更直接的线性卡尔曼公式推导笔记.html)
 
 
 

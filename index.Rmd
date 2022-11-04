@@ -57,6 +57,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
     - [Vector_valued_forms的一些运算](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/Vector_valued_forms的一些运算.html)
 
-
+    - [Ck流形切向量定义](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/Ck流形切向量定义.html)
 
 

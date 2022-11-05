@@ -37,6 +37,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
     - [OKVIS论文笔记](https://newthinker-jeffrey.github.io/SLAM/OKVIS论文笔记.html)
     
+    - [边缘化](https://newthinker-jeffrey.github.io/SLAM/边缘化.html)
+    
     - [回环检测_Active_Correspondence_Search](https://newthinker-jeffrey.github.io/SLAM/回环检测_Active_Correspondence_Search.html)
     
     - [回环检测_maplab中的loop_closure](https://newthinker-jeffrey.github.io/SLAM/回环检测_maplab中的loop_closure.html)

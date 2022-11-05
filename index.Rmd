@@ -1,7 +1,8 @@
 ---
 title: "Newthinker-Jeffrey's website"
 output:
-  html_document: default
+  html_document:
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -16,25 +17,64 @@ knitr::opts_chunk$set(echo = TRUE)
 
 -----------
 
-## Blogs
+## 一些博客和笔记
 
 ### 算法
+
+- SLAM
+ 
+    - [线性方程组求解](https://newthinker-jeffrey.github.io/SLAM/线性方程组求解.html)
+
+    - [SLAM因子图读书笔记](https://newthinker-jeffrey.github.io/SLAM/SLAM因子图读书笔记.html)
+    
+    - [嵌入在结合代数中的李群及其李代数](https://newthinker-jeffrey.github.io/SLAM/嵌入在结合代数中的李群及其李代数.html)
+    
+    - [First_Estimate_Jacobian](https://newthinker-jeffrey.github.io/SLAM/First_Estimate_Jacobian.html)
+    
+    - [Ceres中一些重要的tips](https://newthinker-jeffrey.github.io/SLAM/Ceres中一些重要的tips.html)
+    
+    - [Ceres中的Robust_kernel机制](https://newthinker-jeffrey.github.io/SLAM/Ceres中的Robust_kernel机制.html)
+
+    - [OKVIS论文笔记](https://newthinker-jeffrey.github.io/SLAM/OKVIS论文笔记.html)
+    
+    - [回环检测_Active_Correspondence_Search](https://newthinker-jeffrey.github.io/SLAM/回环检测_Active_Correspondence_Search.html)
+    
+    - [回环检测_maplab中的loop_closure](https://newthinker-jeffrey.github.io/SLAM/回环检测_maplab中的loop_closure.html)
+
+    - [回环检测_基于词袋模型的回环检测流程](https://newthinker-jeffrey.github.io/SLAM/回环检测_基于词袋模型的回环检测流程.html)
+    
+    
+    
+    
+
 
 - 一些 2017 年前写的老文章
 
     - [粒子滤波](https://newthinker-jeffrey.github.io/old_articles_before_2017/粒子滤波.html)
     
-    - [(UKF)_Scaled_Unscented_Transform_变尺度无味变换中的一些技术性推导](https://newthinker-jeffrey.github.io/old_articles_before_2017/(UKF)_Scaled_Unscented_Transform_变尺度无味变换中的一些技术性推导.html)
-    
     - [带约束的最优化问题](https://newthinker-jeffrey.github.io/old_articles_before_2017/带约束的最优化问题.html)
 
     - [等式约束优化问题的求解](https://newthinker-jeffrey.github.io/old_articles_before_2017/等式约束优化问题的求解.html)
 
+    - [(UKF)_Scaled_Unscented_Transform_变尺度无味变换中的一些技术性推导](https://newthinker-jeffrey.github.io/old_articles_before_2017/(UKF)_Scaled_Unscented_Transform_变尺度无味变换中的一些技术性推导.html)
+    
     - [卡尔曼滤波公式推导笔记](https://newthinker-jeffrey.github.io/old_articles_before_2017/卡尔曼滤波公式推导笔记.html)
 
     - [更直接的线性卡尔曼公式推导笔记](https://newthinker-jeffrey.github.io/old_articles_before_2017/更直接的线性卡尔曼公式推导笔记.html)
 
-### 一些纯数学方面的笔记
+    - [四元数与旋转矩阵的一些结论](https://newthinker-jeffrey.github.io/old_articles_before_2017/四元数与旋转矩阵的一些结论.html)
+    
+
+### 应用数学
+
+- 随机过程
+
+    - [随机过程重要概念快速回顾](https://newthinker-jeffrey.github.io/Probability/随机过程重要概念快速回顾.html)
+
+
+### 纯数学
+
+**纯数学方面的一些笔记**
 
 - 分析（Analysis）
 
@@ -60,6 +100,7 @@ knitr::opts_chunk$set(echo = TRUE)
     - [李群李代数一些有趣的问题](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/李群李代数一些有趣的问题.html)
 
     - [左右不变向量场与在纤维丛中的运用](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/左右不变向量场与在纤维丛中的运用.html)
+    
     - [关于联络与曲率的一些杂记](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/关于联络与曲率的一些杂记.html)
 
 

@@ -11,9 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 --------
 
-## Resume
+## Resume 我的简历
 
-[My Resume](https://newthinker-jeffrey.github.io/resume.html)
+**进入**： [我的简历](https://newthinker-jeffrey.github.io/resume.html)
 
 -----------
 

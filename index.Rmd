@@ -19,6 +19,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 一些博客和笔记
 
+
+**下面是我之前写过的一部分技术博客和数学方面的笔记，以便您大概了解我理论方面的掌握程度**。
+
+
 ### 算法
 
 - SLAM
@@ -50,7 +54,7 @@ knitr::opts_chunk$set(echo = TRUE)
     
 
 
-- 一些 2017 年前写的老文章
+- 一些更早的文章（2016 年前）
 
     - [粒子滤波](https://newthinker-jeffrey.github.io/old_articles_before_2017/粒子滤波.html)
     
@@ -89,6 +93,8 @@ knitr::opts_chunk$set(echo = TRUE)
     
 - 微分几何 （Differential_Geometry）
 
+    - [李群李代数一些有趣的问题](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/李群李代数一些有趣的问题.html)
+
     - [Ck流形切向量定义](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/Ck流形切向量定义.html)
 
     - [Frobenius定理和Pfaff方程组](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/Frobenius定理和Pfaff方程组.html)
@@ -99,11 +105,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
     - [Frölicher_Nijenhuis_bracket和曲率](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/Frölicher_Nijenhuis_bracket_and_Curvature.html)
 
-    - [李群李代数一些有趣的问题](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/李群李代数一些有趣的问题.html)
 
     - [左右不变向量场与在纤维丛中的运用](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/左右不变向量场与在纤维丛中的运用.html)
     
-    - [关于联络与曲率的一些杂记](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/关于联络与曲率的一些杂记.html)
+    - [关于纤维丛上联络与曲率，结构方程](https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/关于联络与曲率的一些杂记.html)
 
 
 

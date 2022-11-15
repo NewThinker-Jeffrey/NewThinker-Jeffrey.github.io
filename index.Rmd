@@ -48,9 +48,14 @@ knitr::opts_chunk$set(echo = TRUE)
     - [回环检测_maplab中的loop_closure](https://newthinker-jeffrey.github.io/SLAM/回环检测_maplab中的loop_closure.html)
 
     - [回环检测_基于词袋模型的回环检测流程](https://newthinker-jeffrey.github.io/SLAM/回环检测_基于词袋模型的回环检测流程.html)
+
+    - [ORB_SLAM_论文笔记](https://newthinker-jeffrey.github.io/SLAM/ORB_SLAM_论文笔记.html)
+
+    - [ORB_SLAM2_论文笔记](https://newthinker-jeffrey.github.io/SLAM/ORB_SLAM2_论文笔记.html)
+
+    - [ORB_SLAM_3论文笔记](https://newthinker-jeffrey.github.io/SLAM/ORB_SLAM_3论文笔记.html)
     
-    
-    
+    - [COLMAP_SfM论文笔记](https://newthinker-jeffrey.github.io/SLAM/COLMAP_SfM论文笔记.html)
     
 
 

@@ -1,0 +1,549 @@
+<!DOCTYPE html><html><head>
+      <title>ORB_SLAM_3&#x8BBA;&#x6587;&#x7B14;&#x8BB0;</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="orb-slam3-%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0">ORB-SLAM3 &#x8BBA;&#x6587;&#x7B14;&#x8BB0;</h1>
+
+<hr>
+<p>ORB-SLAM-3</p>
+<p>&#x65B0;&#x7279;&#x6027;&#xFF1A; IMU, Atlas</p>
+<hr>
+<p>III. SYSTEM OVERVIEW</p>
+<p>&#x4E0E; ORB-SLAM-2  &#x76F8;&#x6BD4;&#x6700;&#x663E;&#x8457;&#x7684; novelties &#x5728;&#x4E8E;</p>
+<ul>
+<li>
+<p>Atlas, multi-map &#x591A;&#x5730;&#x56FE;&#x652F;&#x6301;&#xFF1A;Atlas &#x4E2D;&#x5305;&#x542B;&#x4E00;&#x7CFB;&#x5217;&#x4E92;&#x4E0D;&#x8FDE;&#x901A;&#x7684; map&#xFF0C;</p>
+<ul>
+<li>&#x5176;&#x4E2D;&#x6709;&#x4E00;&#x4E2A; active map&#xFF0C;&#x662F;&#x5F53;&#x524D; tracking &#x7EBF;&#x7A0B;&#x6240;&#x53C2;&#x8003;&#x7684;&#x5730;&#x56FE;&#xFF0C;&#x5E76;&#x4F1A;&#x5728;local mapping &#x7EBF;&#x7A0B;&#x4E2D;&#x6301;&#x7EED;&#x66F4;&#x65B0;&#xFF1B;</li>
+<li>&#x5176;&#x4F59;&#x7684;&#x662F; non-active map &#xFF08;&#x5982;&#x679C; &#x5F53;&#x524D; frame &#x7684; tracking &#x5931;&#x8D25;&#xFF0C;&#x4F1A;&#x5C1D;&#x8BD5;&#x5728;&#x5305;&#x62EC; non-active map &#x5728;&#x5185;&#x7684;&#x6240;&#x6709;map &#x4E2D;&#xFF0C; &#x627E; relocalization&#xFF0C;&#x4E14;&#x4F1A;&#x628A; relocalization &#x6D89;&#x53CA;&#x7684; map &#x6807;&#x8BB0;&#x4E3A; active map&#xFF0C;&#x5177;&#x4F53;&#x89C1; tracking &#x7EBF;&#x7A0B;&#x7684;&#x4ECB;&#x7ECD;&#xFF09;&#xFF1B;</li>
+</ul>
+</li>
+<li>
+<p>Tracking thread &#xFF1A;&#x4E0E; ORB-SLAM-2 &#x4E2D;&#x7C7B;&#x4F3C;&#xFF0C;&#x6B64;&#x7EBF;&#x7A0B;&#x4E3B;&#x8981;&#x8D1F;&#x8D23; &#x5B9E;&#x65F6;&#x8BA1;&#x7B97;&#x5F53;&#x524D; frame &#x76F8;&#x5BF9;&#x4E8E; active map &#x7684;&#x4F4D;&#x59FF;&#xFF08;&#x6700;&#x5C0F;&#x5316;&#x91CD;&#x6295;&#x5F71;&#xFF09;&#xFF0C;&#x5E76;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x5C06;&#x5F53;&#x524D;&#x5E27;&#x63D2;&#x5165;&#x4E3A;&#x65B0;&#x7684;keyframe&#xFF1B;ORB-SLAM-3 &#x4E2D;&#x7684;&#x4E0D;&#x540C;&#x70B9;&#x5728;&#x4E8E;&#xFF1A;</p>
+<ul>
+<li>&#x4F18;&#x5316;&#x65F6;&#x53EF;&#x4EE5;&#x52A0;&#x5165;&#x60EF;&#x6027;(IMU)&#x6B8B;&#x5DEE;:  In <strong>visual-inertial</strong> mode, the <strong>body velocity and IMU biases</strong> are estimated by including the <strong>inertial residuals</strong> in the optimization.</li>
+<li>&#x76F4;&#x63A5; tracking &#x4E0A;&#x4E00;&#x5E27;&#x5931;&#x8D25;&#x65F6;&#xFF0C;&#x4F1A;&#x5728;&#x591A;&#x5730;&#x56FE;&#x4E2D;&#x5C1D;&#x8BD5;&#x91CD;&#x5B9A;&#x4F4D;&#x3002;
+<ul>
+<li>&#x5982;&#x679C;&#x91CD;&#x5B9A;&#x4F4D;&#x6210;&#x529F;&#xFF0C;&#x5C31;&#x628A;&#x88AB;&#x91CD;&#x5B9A;&#x4F4D;&#x5230;&#x7684; map &#x5207;&#x6362;&#x4E3A;&#x65B0;&#x7684; active map;  When tracking is lost, the tracking thread tries to relocalize the current frame in all the Atlas&#x2019; maps. If relocalized, tracking is resumed, switching the active map if needed.</li>
+<li>&#x5426;&#x5219;&#xFF0C;&#x82E5;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x5185;&#x603B;&#x662F; tracking &#x5931;&#x8D25;&#xFF0C;&#x5219;&#x628A;&#x5F53;&#x524D;&#x7684;  active map &#x6807;&#x8BB0;&#x4E3A; non-active&#xFF0C;&#x5E76;&#x521D;&#x59CB;&#x5316;&#x4E00;&#x4E2A;&#x65B0;&#x7684; map &#x4F5C;&#x4E3A; active map&#xFF1B;   Otherwise, after a certain time, the active map is stored as non-active, and a new active map is initialized from scratch.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Local mapping thread&#xFF1A; &#x4E0E; ORB-SLAM-2 &#x4E2D;&#x7C7B;&#x4F3C;&#xFF0C;Local mapping &#x7EBF;&#x7A0B; &#x4F1A; &#x6DFB;&#x52A0;&#x65B0;&#x7684; keyframe &#x548C; map point &#x5230; active map&#xFF0C;&#x79FB;&#x9664;&#x5197;&#x4F59;&#x7684; keyframe&#xFF0C;local BA &#x4F18;&#x5316;&#xFF1B;ORB-SLAM-3 &#x4E2D;&#x7684;&#x4E0D;&#x540C;&#x70B9;&#x5728;&#x4E8E;&#xFF1A;</p>
+<ul>
+<li>&#x53EF;&#x4EE5;&#x652F;&#x6301; visual-inertial BA</li>
+<li>in the inertial case, the IMU parameters are initialized and refined by the mapping thread</li>
+</ul>
+</li>
+<li>
+<p>Loop and map merging thread &#xFF1A; ORB-SLAM-2 &#x4E2D;&#x7684;  loop closing  &#x76F8;&#x5F53;&#x4E8E;&#x53EA;&#x5BF9; active map &#x8FDB;&#x884C;&#xFF1B;&#x800C; ORB-SLAM-3 &#x4E2D;&#xFF0C; &#x5BF9;&#x4E8E;&#x65B0;&#x52A0;&#x5165; active map &#x7684; keyframe &#xFF0C; &#x5BF9; Atlas &#x4E2D;&#x7684;&#x6240;&#x6709; map &#x5C1D;&#x8BD5;  loop  (detects common regions between the active map and the whole Atlas at keyframe rate.)</p>
+<ul>
+<li>&#x5982;&#x679C; loop &#x5230;&#x7684; &#x533A;&#x57DF;&#x8FD8;&#x662F;&#x5728; active map &#x4E2D;&#xFF0C;&#x90A3;&#x8FD9;&#x5C31;&#x662F;&#x4E00;&#x6B21;&#x666E;&#x901A;&#x7684;  loop closing &#xFF0C;&#x5C06;&#x6267;&#x884C;  loop correction&#xFF1B;</li>
+<li>&#x5426;&#x5219;&#xFF0C;&#x5982;&#x679C; loop &#x5230;&#x7684;&#x533A;&#x57DF;&#x5728;&#x5176;&#x4ED6;&#x5730;&#x56FE;&#x4E2D;&#xFF0C;&#x5219;&#x628A;&#x8BE5;&#x5730;&#x56FE; merge &#x5230;  active map &#x4E2D;&#xFF1B;</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>IV. CAMERA MODEL</p>
+<p>ORB-SLAM-3 &#x7684;&#x53E6;&#x4E00;&#x4E2A;&#x6539;&#x8FDB;&#x662F;&#xFF0C;&#x628A; camera &#x6A21;&#x578B;&#x7684;&#x63A5;&#x53E3; (projection and unprojection functions, Jacobian, etc.)   &#x62BD;&#x8C61;&#x4E86;&#x51FA;&#x6765;&#xFF0C;&#x4EE5;&#x4FBF;&#x7075;&#x6D3B;&#x652F;&#x6301;&#x591A;&#x79CD; camera &#x6A21;&#x578B;&#xFF1B;&#x57FA;&#x4E8E;&#x65B0;&#x7684;&#x63A5;&#x53E3;&#xFF0C;ORB-SLAM-3 &#x4E2D;&#x5DF2;&#x7ECF;&#x652F;&#x6301;&#x4E86; pin-hole &#x548C;  Kannala-Brandt fisheye model &#x3002;</p>
+<p>&#x4EE5;&#x524D;&#x7684; ORB-SLAM &#x4EE5;&#x53CA;&#x5176;&#x4ED6;&#x4E00;&#x4E9B;&#x5E38;&#x89C1;&#x7684;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x7B97;&#x6CD5;&#x4E2D;&#xFF0C;&#x901A;&#x5E38;&#x4F1A;&#x628A; pin-hole &#x6A21;&#x578B;&#x4F5C;&#x4E3A;&#x5047;&#x8BBE;&#x3002;&#x7136;&#x540E;&#x628A;&#x6574;&#x5F20;&#x56FE;&#x7247;&#x6216;&#x8005;&#x53EA;&#x628A;&#x5176;&#x4E2D;&#x7684;&#x7279;&#x5F81;&#x70B9;&#x6620;&#x5C04;&#x5230; pin-hole &#x6A21;&#x578B;&#x7684;&#x7406;&#x60F3;&#x6210;&#x50CF;&#x5E73;&#x9762;&#x4E0A;&#x3002;&#x4F46;&#x8FD9;&#x53EA;&#x9002;&#x7528;&#x4E8E;&#x6444;&#x50CF;&#x5934; FOV &#x5C0F;&#x4E8E;180&#xB0;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x800C;&#x5BF9;&#x4E8E; fisheye lenses, &#x5B83;&#x7684; FOV &#x53EF;&#x80FD;&#x8FBE;&#x5230;&#x751A;&#x81F3;&#x8D85;&#x8FC7; 180&#xB0;&#x3002;&#x6B64;&#x65F6; pin-hole &#x6A21;&#x578B;&#x5047;&#x8BBE;&#x5C31;&#x4E0D;&#x518D;&#x6210;&#x7ACB;&#x3002;ORB-SLAM-3 &#x4E2D;&#x5219;&#x5141;&#x8BB8;&#x66F4;&#x7075;&#x6D3B;&#x7684; camera &#x6A21;&#x578B;&#xFF1B;</p>
+<p>&#x4E3A;&#x4E86;&#x9002;&#x914D;&#x66F4;&#x7075;&#x6D3B;&#x7684;camera model&#xFF0C;&#x539F;ORB-SLAM&#x4E2D;&#x7684;&#x4E00;&#x4E9B;&#x73AF;&#x8282;&#x9700;&#x8981;&#x8DDF;&#x7740;&#x8C03;&#x6574;&#xFF1A;</p>
+<ul>
+<li>
+<p>A. Relocalization: PnP &#x6C42;&#x89E3;&#x95EE;&#x9898;&#x3002;Tracking &#x5931;&#x8D25;&#x540E;&#xFF0C;ORB-SLAM &#x8FDB;&#x884C; relocalization &#x65F6;&#x9700;&#x8981;&#x6C42;&#x89E3; PnP&#x3002;</p>
+<ul>
+<li>&#x4EE5;&#x524D;&#xFF0C;&#x8001;&#x7684; ORB-SLAM &#x76F4;&#x63A5;&#x4F7F;&#x7528; ePnP &#x7B97;&#x6CD5;&#x8FDB;&#x884C;&#x6C42;&#x89E3;&#xFF0C;&#x8BE5;&#x7B97;&#x6CD5;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;&#x4E86; calibrated pin-hole camera &#xFF1B;</li>
+<li>&#x4F46; ORB-SLAM-3  &#x4E2D;&#xFF0C;&#x4E3A;&#x4E86;&#x8BA9; PnP &#x7B97;&#x6CD5;&#x4E0D;&#x4F9D;&#x8D56;&#x5177;&#x4F53;&#x7684; camera model&#xFF0C;&#x9009;&#x7528;&#x4E86; Maximum Likelihood Perspective-n-Point algorithm (MLPnP) &#xFF0C;&#x8BE5;&#x7B97;&#x6CD5;&#x53EA;&#x9700;&#x8981; camera &#x63D0;&#x4F9B;&#x4E00;&#x4E2A; unprojection function (passing from pixels to projection rays);</li>
+</ul>
+</li>
+<li>
+<p>B. Non-rectified Stereo SLAM  (ORB-SLAM-2 &#x4E2D;&#x53EA;&#x652F;&#x6301; rectified Stereo SLAM)</p>
+<ul>
+<li>Most stereo SLAM systems assume that stereo frames are <strong>rectified</strong>, i.e.
+<ul>
+<li>both images are transformed to pin-hole projections using the same focal length,</li>
+<li>with image planes co-planar,</li>
+<li>and are aligned with horizontal epipolar lines, such that a feature in one image can be easily matched by looking at the same row in the other image.</li>
+</ul>
+</li>
+<li>However the assumption of rectified stereo images is <strong>very restrictive and</strong>, in many applications, is neither suitable nor feasible. e.g.
+<ul>
+<li>a divergent stereo pair,</li>
+<li>or a stereo fisheye camera would require severe <strong>image cropping</strong>, loosing the advantages of a large FOV.</li>
+</ul>
+</li>
+<li>For that reason, our system does not rely on image rectification, considering the stereo rig as two monocular cameras having:
+<ul>
+<li>
+<ol>
+<li>&#x6709;&#x56FA;&#x5B9A;&#x5916;&#x53C2;. a constant relative SE(3) transformation between them, and</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>optionally &#x6709;&#x4EA4;&#x53C9;&#x89C6;&#x91CE;. optionally, a common image region that observes the same portion of the scene.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>V. VISUAL-INERTIAL SLAM</p>
+<p>ORB-SLAM-3 &#x5728; VI-SLAM &#x7684;&#x5904;&#x7406;&#x4E0A;&#xFF0C;&#x6BD4;&#x524D;&#x4F5C; ORB-SLAM-VI &#x6709;&#x4E86;&#x66F4;&#x591A;&#x6539;&#x8FDB;&#xFF0C;&#x4E3B;&#x8981;&#x4F53;&#x73B0;&#x5728;</p>
+<ul>
+<li>&#x66F4;&#x5FEB;&#x3001;&#x66F4;&#x51C6;&#x786E;&#x7684;&#x7684;&#x521D;&#x59CB;&#x5316;</li>
+<li>&#x652F;&#x6301; pin-hole &#x548C; fisheye &#x4E24;&#x79CD; camera &#x6A21;&#x578B; &#xFF08;&#x524D;&#x4F5C;ORB-SLAM-VI &#x53EA;&#x652F;&#x6301; pin-hole&#xFF09;</li>
+</ul>
+<p>B. IMU Initialization<br>
+&#x628A; IMU Initialization &#x770B;&#x505A;&#x4E00;&#x4E2A; MAP estimation problem&#xFF0C;&#x5E76;&#x5206;&#x6210;&#x4E09;&#x4E2A;&#x9636;&#x6BB5;&#xFF1A;</p>
+<ul>
+<li>
+<ol>
+<li>Vision-only MAP Estimation: &#x5B9E;&#x73B0;&#x4E00;&#x4E2A; up to scale &#x7684; SfM&#xFF0C;&#x4F30;&#x8BA1;&#x5404; frame &#x7684; pose (up to scale);</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>Inertial-only MAP Estimation: &#x4F30;&#x8BA1; &#x5C3A;&#x5EA6;<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span>&#xFF0C; &#x91CD;&#x529B;&#x5BF9;&#x9F50;&#x65B9;&#x5411;&#xFF0C;IMU bias&#xFF0C; &#x4EE5;&#x53CA;&#x5404; image &#x7684; velocity;</li>
+</ol>
+<ul>
+<li>&#x5BF9;&#x4E8E;&#x91CD;&#x529B;&#x5BF9;&#x9F50;&#x65B9;&#x5411;&#xFF0C;ORB-SLAM-3&#x4E2D;&#x5C06;&#x5176;&#x8868;&#x8FBE;&#x4E3A;&#x4E00;&#x4E2A;&#x65CB;&#x8F6C;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x674E;&#x4EE3;&#x6570;&#x6C42;&#x5BFC;&#x3002;3&#x7EF4;&#x7684;&#x674E;&#x4EE3;&#x6570;&#x4E0A;&#x7684;&#x6270;&#x52A8;&#x65B9;&#x5411;&#xFF0C;&#x4E0E;&#x91CD;&#x529B;&#x5411;&#x91CF;&#x5E73;&#x884C;&#x65F6;&#xFF0C;&#x4E0D;&#x4F1A;&#x6539;&#x53D8;&#x91CD;&#x529B;&#x5411;&#x91CF;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x5411;&#x7684;&#x6270;&#x52A8;&#x662F;&quot;&#x65E0;&#x7528;&quot;&#x7684;&#xFF1B;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x628A;&#x674E;&#x4EE3;&#x6570;&#x4E0A;&#x7684;&#x6270;&#x52A8;&#x9650;&#x5236;&#x5728;&#x4E0E;&#x91CD;&#x529B;&#x65B9;&#x5411;(0,0,1)&#x5782;&#x76F4;&#x7684;2&#x7EF4;&#x5B50;&#x7A7A;&#x95F4;&#x4E0A;&#xFF0C;&#x89C1;&#x8BBA;&#x6587;&#x4E2D;&#x7684;&#x5F0F;(9)&#x3002;&#x53EF;&#x4EE5;&#x4E0E;VINS&#x4E2D;&#x7684;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#x505A;&#x4E2A;&#x5BF9;&#x6BD4;&#xFF0C;VINS&#x5C06;&#x91CD;&#x529B;&#x65B9;&#x5411;&#x8868;&#x8FBE;&#x4E3A;&#x4E00;&#x4E2A;&#x5411;&#x91CF;&#xFF0C;&#x5728;2&#x7EF4;&#x7403;&#x9762;&#x4E0A;&#x4EBA;&#x5DE5;&#x9009;&#x62E9;&#x5408;&#x9002;&#x7684;2&#x7EF4;&#x5750;&#x6807;&#x6C42;&#x5BFC;&#xFF0C;&#x65E0;&#x6CD5;&#x4F7F;&#x7528;&#x674E;&#x4EE3;&#x6570;&#x3002;</li>
+<li>&#x4E3A;&#x9632;&#x6B62;&#x5C3A;&#x5EA6;&#x53D8;&#x8D1F;&#xFF0C;&#x5C3A;&#x5EA6;&#x7684;&#x66F4;&#x65B0;&#x4E5F;&#x505A;&#x4E86;&#x7279;&#x6B8A;&#x5904;&#x7406;&#xFF08;&#x4E58;&#x4EE5;&#x6270;&#x52A8;&#x7684;&#x6307;&#x6570;&#x6620;&#x5C04;&#xFF0C;&#x4EE3;&#x66FF;&#x76F4;&#x63A5;&#x52A0;&#x6270;&#x52A8;&#xFF09;&#xFF0C;&#x89C1;&#x5F0F;(10)</li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li>Visual-Inertial MAP Estimation:  VI &#x8054;&#x5408;&#x4F18;&#x5316; . &#x521D;&#x59CB;&#x5316;&#x4E2D;&#x7684;&#x8FD9;&#x4E2A;VI &#x8054;&#x5408;&#x4F18;&#x5316;&#x73AF;&#x8282;&#x4E0E; figure 2a &#x4E2D;&#x4E00;&#x822C;&#x7684; VI optimization &#x95EE;&#x9898;&#x76F8;&#x6BD4;&#xFF0C;&#x7279;&#x6B8A;&#x4E4B;&#x5904;&#x5728;&#x4E8E;&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;&#x4E2D;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A; bias &#x4E0D;&#x968F;&#x65F6;&#x95F4;&#x53D8;&#x5316;</li>
+</ol>
+</li>
+</ul>
+<p>C. Tracking and Mapping</p>
+<ul>
+<li>Tracking:  solves a simplified visual-inertial optimization where <strong>only the states of the last two frames</strong> are optimized, while map points remain fixed.</li>
+<li>Local mapping: use <strong>a sliding window of keyframes and their points</strong> as optimizable variables, including also observations to these points from covisible keyframes but keeping their pose fixed.</li>
+</ul>
+<p>D. Robustness to tracking loss</p>
+<p>&#x5BF9;&#x4E8E;&#x6CA1;&#x6709; IMU &#x7684;&#x7EAF;&#x89C6;&#x89C9; SLAM &#x6216; VO&#xFF0C;&#x77ED;&#x6682;&#x7684;&#x6444;&#x50CF;&#x5934;&#x906E;&#x6321;&#x6216;&#x5FEB;&#x901F;&#x8FD0;&#x52A8;&#x90FD;&#x4F1A;&#x5BFC;&#x81F4;&#x89C6;&#x89C9;&#x7279;&#x5F81;&#x9A6C;&#x4E0A;&#x8DDF;&#x4E22;&#x3002;<br>
+&#x4F46;&#x5982;&#x679C;&#x52A0;&#x4E0A; IMU &#x7684;&#x8F85;&#x52A9;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;IMU&#x9884;&#x6D4B;&#x5F53;&#x524D;frame&#x7684;pose&#xFF0C;&#x5E76;&#x628A;map points &#x6295;&#x5F71;&#x5230;&#x8BE5;frame&#x4E2D;&#x5E76;&#x5C1D;&#x8BD5;&#x5728;&#x6295;&#x5F71;&#x70B9;&#x9644;&#x8FD1;&#x641C;&#x7D22;&#x5339;&#x914D;&#x3002;&#x6709; IMU &#x65F6;&#xFF0C;visually lost&#x5206;&#x4E3A;&#x4E24;&#x4E2A;&#x9636;&#x6BB5;&#x5904;&#x7406;&#xFF1A;</p>
+<ul>
+<li>Short-term lost:  &#xFF08;&#x89C6;&#x89C9;&#x4E22;&#x5931;&#x4E0D;&#x8D85;&#x8FC7;5s&#xFF09;
+<ul>
+<li>the current body state is estimated from IMU readings, and map points are projected in the estimated camera pose and searched for matches within a large image window. The resulting matches are included in visual-inertial optimization.</li>
+<li>In most cases this allows to recover visual tracking. Otherwise, after 5 seconds, we pass to the next stage.</li>
+</ul>
+</li>
+<li>Long-term lost:  &#xFF08;&#x89C6;&#x89C9;&#x4E22;&#x5931;&#x8D85;&#x8FC7;5s&#xFF09;
+<ul>
+<li>A new visual-inertial map is initialized as explained above, and it becomes the active map;</li>
+</ul>
+</li>
+</ul>
+<p>&#x5982;&#x679C;IMU&#x521D;&#x59CB;&#x5316;&#x540E;&#x4E0D;&#x5230;15s&#x89C6;&#x89C9;&#x5C31;&#x8DDF;&#x4E22;&#x4E86;&#xFF0C;&#x5219;&#x5BF9;&#x5E94;&#x7684;&#x5730;&#x56FE;&#x5C06;&#x88AB;&#x4E22;&#x5F03;&#xFF0C;&#x5DF2;&#x514D;&#x5728; Atlas &#x4E2D;&#x79EF;&#x6512;&#x65E0;&#x7528;&#x7684;&#x5730;&#x56FE;&#x3002;(If the system gets lost within 15 seconds after IMU initialization, the map is discarded. This prevents to accumulate inaccurate and meaningless maps.)</p>
+<hr>
+<p>VI. MAP MERGING AND LOOP CLOSING</p>
+<p>A. Place Recognition<br>
+&#x8FC7;&#x7A0B;&#xFF1A;&#x8BBE; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x4EE3;&#x8868;&#x9700;&#x8981;&#x641C;&#x7D22; loop &#x7684; active keyframe &#xFF08;&#x5373;query keyframe&#xFF09;.</p>
+<ul>
+<li>
+<ol>
+<li>DBoW2 candidate keyframes:  &#x4ECE; Atlas DBoW2 database &#x4E2D;&#x627E;&#x51FA; 3 &#x4E2A;&#x4E0E; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x7684;&#x8BCD;&#x5411;&#x91CF;&#x6700;&#x76F8;&#x4F3C;&#xFF08;&#x4E14;&#x4E0E;<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>&#x4E0D;&#x5171;&#x89C6;&#xFF09;&#x7684; candidate keyframe&#xFF0C;&#x6BCF;&#x4E2A;&#x8FD9;&#x6837;&#x7684; candidate keyframe &#x6211;&#x4EEC;&#x8BB0;&#x4F5C; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">K_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>;</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>Local window:</li>
+</ol>
+<ul>
+<li>&#x5BF9;&#x4E8E;&#x6BCF;&#x4E2A; candidate keyframe <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">K_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>&#xFF0C;&#x6211;&#x4EEC;&#x4E3A;&#x5B83;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A; local window&#xFF0C;&#x8FD9;&#x4E2A;window  &#x4E2D;&#x5305;&#x542B;&#x4E86; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">K_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x4EE5;&#x53CA;&#x4E0E;&#x4ED6;&#x5171;&#x89C6;&#x6700;&#x597D;&#x7684;&#x90A3;&#x4E9B;keyframes&#xFF0C;&#x4EE5;&#x53CA;&#x6240;&#x6709;&#x8FD9;&#x4E9B;keyrame &#x89C2;&#x6D4B;&#x5230;&#x7684;map points;</li>
+<li>DBoW2 &#x5728; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>  &#x548C;&#x8FD9;&#x4E9B;  local window keyframes &#x4E4B;&#x95F4;&#x627E;&#x51FA;&#x4E00;&#x7CFB;&#x5217; 2D-2D match&#xFF1B;</li>
+<li>&#x6BCF;&#x4E2A; 2D-2D match &#x53C8;&#x53EF;&#x4EE5;&#x8F6C;&#x5316; map points &#x95F4;&#x7684; 3D-3D match;</li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li>3D aligning transformation:<br>
+RANSAC &#x6C42;<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">K_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>&#x4E0E; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x7684;&#x76F8;&#x5BF9;&#x53D8;&#x6362; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>a</mi><mi>m</mi></mrow></msub></mrow><annotation encoding="application/x-tex">T_{am}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">am</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>&#xFF0C;&#x5BF9;&#x4E8E;&#x5355;&#x76EE;&#x60C5;&#x51B5;<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>a</mi><mi>m</mi></mrow></msub><mo>&#x2208;</mo><mi>S</mi><mi>i</mi><mi>m</mi><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T_{am}\in Sim(3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">am</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x2208;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">im</span><span class="mopen">(</span><span class="mord">3</span><span class="mclose">)</span></span></span></span>&#xFF0C;&#x5BF9;&#x4E8E;stereo&#x60C5;&#x51B5; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>a</mi><mi>m</mi></mrow></msub><mo>&#x2208;</mo><mi>S</mi><mi>E</mi><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T_{am}\in SE(3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">am</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x2208;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">SE</span><span class="mopen">(</span><span class="mord">3</span><span class="mclose">)</span></span></span></span>&#xFF1B;&#x5BF9;&#x4E8E;&#x4E24;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x5728;RANSAC&#x7684;&#x6BCF;&#x4E00;&#x6B65;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x90FD;&#x901A;&#x8FC7; Horn &#x7B97;&#x6CD5; [77] &#x7528; 3 &#x7EC4;  3D-3D matches &#x6765;&#x6C42;&#x4E00;&#x4E2A; hypothesis for <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>a</mi><mi>m</mi></mrow></msub></mrow><annotation encoding="application/x-tex">T_{am}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">am</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>&#xFF1B;</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>Guided matching refinement.</li>
+</ol>
+<ul>
+<li>&#x628A; candidate keyframe <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">K_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x6240;&#x5728;&#x7684; local windown &#x4E2D;&#x7684;&#x6240;&#x6709; map points &#x6295;&#x5F71;&#x5230;  active keyframe   <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x4E2D;&#xFF0C;&#x5E76;&#x5C1D;&#x8BD5;&#x5728; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x4E2D;&#x505A; 3D-2D match&#xFF1B;</li>
+<li>&#x53CD;&#x8FC7;&#x6765;&#xFF0C;&#x518D;&#x628A;  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x4E2D; &#x7684;  map points &#x6295;&#x5F71; local windown &#x4E2D;&#x7684;&#x6240;&#x6709; keyframes &#x4E2D;&#xFF0C;&#x5C1D;&#x8BD5;&#x505A; 3D-2D match&#xFF1B;</li>
+<li>&#x628A;&#x627E;&#x5230;&#x7684;&#x6240;&#x6709;&#x5339;&#x914D;&#x7EC4;&#x5408;&#x8D77;&#x6765;&#xFF0C;&#x6700;&#x5C0F;&#x5316;&#x53CC;&#x5411;&#x91CD;&#x6295;&#x5F71;&#x8BEF;&#x5DEE;&#xFF0C;&#x901A;&#x8FC7;&#x4F18;&#x5316;&#x6765; refine <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>a</mi><mi>m</mi></mrow></msub></mrow><annotation encoding="application/x-tex">T_{am}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">am</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>;</li>
+<li>&#x5982;&#x679C;&#x4E0A;&#x4E00;&#x6B65;&#x4F18;&#x5316;&#x7ED3;&#x679C;&#x7684; inlier &#x8D85;&#x8FC7;&#x9608;&#x503C;&#xFF0C;&#x5219;&#x518D;&#x91CD;&#x65B0;&#x8FDB;&#x884C;&#x4E00;&#x6B21;Guided matching&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x8FD9;&#x6B21;&#x505A; 3D-2D match &#x65F6;&#x5C06;&#x7528;&#x66F4;&#x5C0F;&#x7684; image search window.</li>
+</ul>
+</li>
+<li>
+<ol start="5">
+<li>Verification in three covisible keyframes:</li>
+</ol>
+<ul>
+<li>&#x5982;&#x679C;&#x80FD;&#x627E;&#x51FA;&#x4E24;&#x4E2A;&#x4E0E; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x5171;&#x89C6;&#x7684; keyframe&#xFF08;&#x52A0;&#x4E0A;<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>&#x81EA;&#x5DF1;&#x5C31;&#x5171;&#x6709;3&#x4E2A;keyframe&#xFF09;&#xFF0C;&#x4F7F;&#x5F97;&#x5B83;&#x4EEC;&#x5728; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">K_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x7684; local window &#x4E2D; match &#x5230;&#x7684; map points&#x6570;&#x91CF;&#x90FD;&#x8D85;&#x8FC7;&#x4E00;&#x4E2A;&#x9608;&#x503C;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x8BA4;&#x4E3A; &#x672C;&#x6B21; loop &#x901A;&#x8FC7;&#x6821;&#x9A8C;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x7B49;&#x5F85;&#x540E;&#x7EED;&#x65B0;&#x7684; keyframes &#x6253;&#x6765;&#x540E;&#x518D;&#x8FDB;&#x4E00;&#x6B65;&#x5224;&#x65AD; (To verify place recognition, we search in the active part of the map two keyframes covisible with <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> where the number of matches with points in the local window (around <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">K_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>) is over a threshold. If they are not found, the validation is further tried with the new incoming keyframes, without requiring the bag-of-words to fire again)</li>
+<li>The validation continues until
+<ul>
+<li>three keyframes verify <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>a</mi><mi>m</mi></mrow></msub></mrow><annotation encoding="application/x-tex">T_{am}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">am</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, &#x4EE3;&#x8868;&#x6210;&#x529F; loop</li>
+<li>or two consecutive new keyframes fail to verify it, &#x4EE3;&#x8868;loop&#x5931;&#x8D25;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<ol start="6">
+<li>VI Gravity direction verification. &#x6709;IMU&#x65F6;&#x505A;&#x91CD;&#x529B;&#x65B9;&#x5411;&#x6821;&#x9A8C;</li>
+</ol>
+<ul>
+<li>We further check whether the pitch and roll angles (of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>a</mi><mi>m</mi></mrow></msub></mrow><annotation encoding="application/x-tex">T_{am}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">am</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>) are below a threshold to definitively accept  the place recognition hypothesis. (&#x7528;&#x6B64;&#x6821;&#x9A8C;&#xFF0C;&#x9700;&#x5047;&#x8BBE;&#x5404;keyrame &#x7684;pitch roll&#x4E0D;&#x4F1A;&#x6709;&#x5927;&#x53D8;&#x5316;)</li>
+</ul>
+</li>
+</ul>
+<p>B. Visual Map Merging</p>
+<ul>
+<li>
+<ol>
+<li>Welding window assembly:</li>
+</ol>
+<ul>
+<li>Welding window &#x662F;&#x6307; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> and its covisible keyframes, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">K_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> and its covisible keyframes, and all the map point observed by them.</li>
+<li>Before their inclusion in the welding window, the keyframes and map points belonging to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">M_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x6240;&#x5728;&#x7684; active map) are transformed by <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>m</mi><mi>a</mi></mrow></msub></mrow><annotation encoding="application/x-tex">T_{ma}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> to align them with respect to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">M_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">K_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>&#x6240;&#x5728;&#x7684;map).</li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li>Merging maps:  Maps Ma and Mm are fused together to become the new active map.</li>
+</ol>
+<ul>
+<li>active search: &#x4E3A;&#x628A;&#x91CD;&#x590D;&#x7684; map point &#x5408;&#x5E76;&#xFF0C;&#x6211;&#x4EEC;&#x628A; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">M_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x4E2D; 3D point  &#x6295;&#x5F71;&#x5230; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">M_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x7684; keyframes &#x4E2D;&#x6765;&#x627E;3D-2D &#x5339;&#x914D;&#xFF0C;&#x5E76;&#x6700;&#x7EC8;&#x5316;&#x4E3A; 3D-3D &#x7684; map point &#x5339;&#x914D;&#xFF1B;</li>
+<li>&#x5408;&#x5E76; map points: For each match, the point from <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">M_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>  is removed, and the point in Mm is kept accumulating all the observations of the removed point.</li>
+<li>&#x66F4;&#x65B0; covisibility and essential graphs</li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li>Welding bundle adjustment:</li>
+</ol>
+<ul>
+<li>local BA &#x4F18;&#x5316; Welding window &#x4E2D;&#x7684; keyframes &#x548C; map points;</li>
+<li>&#x5176;&#x4ED6;&#x80FD;&#x89C2;&#x6D4B;&#x5230; Welding window  map points &#x7684;&#x5173;&#x952E;&#x5E27;&#x4E5F;&#x4F1A;&#x6DFB;&#x52A0;&#x5230; local BA &#x95EE;&#x9898;&#x4E2D;&#xFF0C;&#x63D0;&#x4F9B;&#x66F4;&#x591A;&#x89C2;&#x6D4B;&#x7EA6;&#x675F;&#xFF0C;&#x4F46;&#x8FD9;&#x4E9B;&#x5173;&#x952E;&#x5E27;&#x7684;pose &#x4F1A;&#x88AB; fix &#x800C;&#x4E0D;&#x4F1A;&#x8DDF;&#x7740;&#x66F4;&#x65B0;&#xFF08;&#x8FD9;&#x4E5F; fix &#x4E86;&#x6B64;BA&#x95EE;&#x9898;&#x7684;&#x89C4;&#x8303;&#x81EA;&#x7531;&#x5EA6;&#xFF09;&#xFF1B;</li>
+</ul>
+</li>
+<li>
+<ol start="4">
+<li>Essential-graph optimization:  (&#x5747;&#x644A;drift)</li>
+</ol>
+<ul>
+<li>A pose-graph optimization is performed using the essential graph of the whole merged map, keeping fixed the keyframes in the welding area.</li>
+<li>This optimization propagates corrections from the welding window to the rest of the map</li>
+</ul>
+</li>
+</ul>
+<p>C. Visual-Inertial Map Merging:     Steps 1) and 3) for the visual only case above are modified to better exploit the inertial information.</p>
+<ul>
+<li>
+<ol>
+<li>VI welding window assembly:  &#x76F8;&#x6BD4;&#x4E0A;&#x9762; visual only case &#x4E2D;&#x7684;1)&#xFF0C;VI welding window&#x4E2D;&#xFF0C; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">M_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>  &#x5230; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">M_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &#x7684;&#x5BF9;&#x9F50;&#x9700;&#x8981;&#x5206;&#x4E24;&#x79CD;&#x60C5;&#x51B5;</li>
+</ol>
+<ul>
+<li>If the active map is mature, we apply the available <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>m</mi><mi>a</mi></mrow></msub><mo>&#x2208;</mo><mi>S</mi><mi>E</mi><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T_{ma} \in SE(3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x2208;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">SE</span><span class="mopen">(</span><span class="mord">3</span><span class="mclose">)</span></span></span></span> to map <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">M_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> before its inclusion in the welding window.</li>
+<li>If the active map is not mature, we align Ma using the available <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>m</mi><mi>a</mi></mrow></msub><mo>&#x2208;</mo><mi>S</mi><mi>i</mi><mi>m</mi><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T_{ma} \in Sim(3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&#x2208;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">im</span><span class="mopen">(</span><span class="mord">3</span><span class="mclose">)</span></span></span></span></li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li>VI welding bundle adjustment:  &#x76F8;&#x6BD4;&#x4E0A;&#x9762; visual only case &#x4E2D;&#x7684;3)&#xFF0C; &#x989D;&#x5916;&#x7684;&#x53D8;&#x5316;&#x5982;&#x4E0B;&#xFF1A;</li>
+</ol>
+<ul>
+<li>&#x5F85;&#x4F18;&#x5316;&#x53D8;&#x91CF;&#x7684;&#x6269;&#x5145;Poses, velocities and biases of keyframes <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">K_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> and their five last temporal keyframes are included as optimizable.</li>
+<li>For <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">M_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, the keyframe immediately before the local window is included but fixed, while for <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">M_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.109em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> the similar keyframe is included but its pose remains optimizable.</li>
+<li>All map points seen by the above mentioned keyframes are optimized, together with poses from <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>m</mi></msub></mrow><annotation encoding="application/x-tex">K_m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">K_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> covisible keyframes.</li>
+</ul>
+</li>
+</ul>
+<p>D. Loop Closing</p>
+<ul>
+<li>Loop closing correction algorithm is analogous to map merging, but in a situation where both keyframes matched by place recognition belong to the active map.</li>
+<li>loop correction &#x4E4B;&#x540E; &quot;&#x53EF;&#x80FD;&quot; &#x8FD8;&#x4F1A;&#x518D;&#x63A5;&#x4E00;&#x4E2A; global BA (to find the MAP estimate after considering the loop closure mid-term and longterm matches)
+<ul>
+<li>&#x5BF9;&#x4E8E; visual-inertial case&#xFF0C;&#x4E3A;&#x9632;&#x6B62;&#x8BA1;&#x7B97;&#x91CF;&#x8FC7;&#x5927;&#xFF0C;&#x53EA;&#x6709;&#x5F53; keyframe &#x603B;&#x6570;&#x5C0F;&#x4E8E;&#x4E00;&#x4E2A;&#x9608;&#x503C;&#x65F6;&#xFF0C;&#x624D;&#x505A;global BA;</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

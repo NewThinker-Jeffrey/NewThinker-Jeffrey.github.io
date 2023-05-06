@@ -12,6 +12,8 @@
 
 - [First_Estimate_Jacobian](./First_Estimate_Jacobian.html)
 
+- [Invariant_EKF](Symmetry_Preserving_Observer_and_Invariant_EKF.html)
+
 - [Ceres中一些重要的tips](./Ceres中一些重要的tips.html)
 
 - [Ceres中的Robust_kernel机制](./Ceres中的Robust_kernel机制.html)

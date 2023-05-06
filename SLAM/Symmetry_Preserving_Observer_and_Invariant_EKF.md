@@ -102,7 +102,7 @@ $\bar {\mathcal L} \cdot err = \mathcal L=[\mathcal L_1,\mathcal L_2...\mathcal 
 
 > 如果不要求全局、或者不要求光滑，这都是没问题的；既要求全局又要求光滑，就需要证明了。
 
-> 首先，我们可以找到一族局部的、光滑的 $\{{\bar {\mathcal L}^\alpha}\}$，使其定义域组成 $(\hat x,u, err)$空间的开覆盖；另外，若  $\bar{\mathcal L}^{\alpha_1}$和$\bar{\mathcal L}^{\alpha_2}$ 是两个局部的增益矩阵（在局部满足方程 $\bar {\mathcal L} \cdot err = \mathcal L$ ），则在他们的公共定义域上，$a\bar{\mathcal L}^{\alpha_1}+b\bar{\mathcal L}^{\alpha_2}$（其中 $a+b=1$）也是符合改方程的增益矩阵；因此，可以用 [单位分解定理(Partition of unity)](https://en.wikipedia.org/wiki/Partition_of_unity#Existence)  得到一个全局的增益矩阵函数 $\bar{\mathcal L}$;
+> 首先，我们可以找到一族局部的、光滑的 $ \{ {\bar {\mathcal L}^\alpha} \} $ ，使其定义域组成 $(\hat x,u, err)$空间的开覆盖；另外，若  $\bar{\mathcal L}^{\alpha_1}$和$\bar{\mathcal L}^{\alpha_2}$ 是两个局部的增益矩阵（在局部满足方程 $\bar {\mathcal L} \cdot err = \mathcal L$ ），则在他们的公共定义域上，$a\bar{\mathcal L}^{\alpha_1}+b\bar{\mathcal L}^{\alpha_2}$（其中 $a+b=1$）也是符合改方程的增益矩阵；因此，可以用 [单位分解定理(Partition of unity)](https://en.wikipedia.org/wiki/Partition_of_unity#Existence)  得到一个全局的增益矩阵函数 $\bar{\mathcal L}$;
 
 ---
 ## 不变性 和 Symmetry Preserving Observer

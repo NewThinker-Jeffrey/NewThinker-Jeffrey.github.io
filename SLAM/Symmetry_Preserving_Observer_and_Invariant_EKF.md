@@ -853,6 +853,73 @@ $\hat x_{t_n}^+=\hat x_{t_n}\cdot (\hat \eta^+)^{-1}=\hat x_{t_n}\cdot \exp(-K\t
 $\hat x_{t_n}^+=(\hat \eta^+)^{-1}  \cdot  \hat x_{t_n}=\exp(-K\tilde y_\xi) \cdot  \hat x_{t_n}$
 > [4\] 中给的是 $\hat x_{t_n}^+=\exp(K\tilde y_\xi)\cdot \hat x_{t_n}$，与上式的差异是括号里差个负号。 [4\] 中可能是错的？ 当右不变 $\eta$ 定义为 $x=\eta \cdot \hat x$ 时，才应该去掉括号中的负号，但 [4\] 中的右不变 $\eta$ 采用的定义是 $x=\eta^{-1}\cdot  \hat x$。
 
+
+### IEKF 的使用
+
+#### 判断 IEKF 是否适用
+
+首先，确定系统的状态量 $x$、控制量 $u$、以及演化方程 $f_u(x)$；
+然后，看是否可以在状态空间 $\mathbb X$ 上构造一个二元乘法运算，使得
+1. $\mathbb X$ 在该乘法下构成李群 $G$ （满足结合律、存在单位元、存在逆元）
+2. 且向量场 $f_u$ 是左或右不变向量场，或者满足 $f(ab)=f(a)b+af(b)+af(Id)b$
+
+如果可以，那么可以使用 IEKF 。
+
+##### 离散时间的情况
+
+
+当 $f_u(x)$ 是左不变 $f_u(x)=xf_u(e)$ 或右不变 $f_u(x)=f_u(e)x$ 时，对应的离散时间状态转移方程也会有很简单的形式。
+对于离散时间的 IEKF，上面的条件2对应：
+
+2. 无噪声的状态转移方程可以写为以下两种形式之一
+    - $x_{t_{n+1}}=x_{t_n}.\Gamma_u$ (对应左不变的 $f_u$) 或 
+    - $x_{t_{n+1}}=\Gamma_u.x_{t_n}$ (对应右不变的 $f_u$)
+
+其中 $\Gamma_u\in G$ 是个依赖于 $u$ 的群元。
+
+> 暂不考虑一般形式（i.e. 既非左不变、又非右不变，但满足 $f(ab)=af(b)+f(a)b-af(e)b$) 的 $f_u$ 对应的离散时间版本。
+
+对于左不变 $f_u(x)$ ，并考虑左不变过程噪声 $w$，我们有：
+
+$\dot x= f_u(x) + x.w = x.u_e + x.w = x.(u_e+w)$
+其中 $u_e = f_u(e)$ 是李代数上的向量，噪声 $w$ 作用在这个向量上。
+假设 $u_e$ 和 $w$ 在 $\Delta t$ 时间内保持恒定，那么
+$\exp(u_e\Delta t+w\Delta t)=\exp(J_l(u_e\Delta t)w\Delta t)\exp(u\Delta t)$
+当 $\Delta t$ 为小量时，$J_l(u_e\Delta t)\approx Id_{\mathfrak g}$，
+$\exp(u_e\Delta t+w\Delta t)\approx \exp(w\Delta t)\exp(u\Delta t)$
+
+因此，离散时间的状态转移方程为
+$$x_{t_{n+1}}=x_{t_n}.\exp((u_e+w)\Delta t)\approx x_{t_n}.\exp(w\Delta t).\exp(u_e\Delta t)$$
+
+定义离散时间的过程噪声 $w_d$ 和控制量 $u_d$ 为 $w_d=w\Delta t$ 和 $u_d = u_e\Delta t$, 那么状态转移方程可进一步简写作：
+
+$$x_{t_{n+1}}=x_{t_n}.\exp(u_d+w_d) \approx x_{t_n}.\exp(w_d).\exp(u_d)$$
+
+类似地，对于右不变的 $f_u(x)$（假设噪声$w$依然是左不变的）：
+$\begin{aligned}\dot x= f_u(x) + x.w &= u_e.x + x.w \\
+&= u_e.x + x.w.x^{-1}.x\\
+&= u_e.x + (Ad_x w).x \\
+&= (u_e+Ad_x w).x\end{aligned}$
+对应的状态转移方程为
+$$\begin{aligned}x_{t_{n+1}}&\approx \exp(u_d+Ad_{x_{t_n}}w_d).x_{t_n} \\
+&\approx \exp(u_d)\exp(Ad_{x_{t_n}}w_d).x_{t_n} \\
+&\approx \exp(u_d).x_{t_n}.\exp(w_d)\end{aligned}$$
+
+
+
+#### LIEKF or RIEKF ?
+
+为了选择合适的 IEKF，首先考察 观测函数  $y=h(x)$: 是否能构造一个 $G$ 在观测空间 $\mathbb Y$ 上的作用 $\rho$，使得在该作用下， $y=h(x)$ 是左或右不变的？
+
+1. 如果可以，且 $y=h(x)$ 是左或右不变的，那么为了系统有更好的收敛性，我们应该分别选择 LIEKF 或 RIEKF；
+    - 如果噪声（过程噪声和观测噪声）都和系统有一致的不变性，那是最理想的，这时系统的收敛性最好；
+    - 如果噪声没有不变性的不变性与系统相反，那系统的收敛性会受到较轻微的影响
+2. 如果不行（观测函数没有不变性），那么与传统EKF一样，此时系统的收敛性无法从理论上得到保证，可以相对随意地选择 LIEKF 或 RIEKF，或者通过实验效果来确定。如果只从计算的方便程度方面考虑:
+    - 若 $f_u$ 是左不变的，那么选用 RIEKF 会方便 $A$ 和 $G$ 的计算；
+    - 若 $f_u$ 是右不变的，那么选用 LIEKF 会方便 $A$ 和 $G$ 的计算；
+
+
+
 ### 一些注意事项
 
 

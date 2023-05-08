@@ -875,7 +875,7 @@ $\hat x_{t_n}^+=(\hat \eta^+)^{-1}  \cdot  \hat x_{t_n}=\exp(-K\tilde y_\xi) \cd
     - $x_{t_{n+1}}=x_{t_n}.\Gamma_u$ (对应左不变的 $f_u$) 或 
     - $x_{t_{n+1}}=\Gamma_u.x_{t_n}$ (对应右不变的 $f_u$)
 
-其中 $\Gamma_u\in G$ 是个依赖于 $u$ 的群元。
+其中 $\Gamma_u\in G$ 是个依赖于 $u$ 的群元。一般把 $u$ 建模为李代数上的向量，且 $\Gamma_u=\exp(u)$.
 
 > 暂不考虑一般形式（i.e. 既非左不变、又非右不变，但满足 $f(ab)=af(b)+f(a)b-af(e)b$) 的 $f_u$ 对应的离散时间版本。
 

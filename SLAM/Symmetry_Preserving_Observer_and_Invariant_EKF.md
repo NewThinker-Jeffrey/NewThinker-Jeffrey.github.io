@@ -523,13 +523,14 @@ $\begin{aligned} x\dot \eta^L &= -f_u(x)\eta + f_u(x\eta) \\
 
 ---
 ### 过程噪声的引入和状态误差的线性化
-过程噪声一般被建模为左不变的，
+
+本节假设过程噪声是左不变的，
 
 $\dot x=f_u(x) + x.w$
 
-其中噪声项$w$定义在李代数上，通过左乘 $x$ 作用到 $x$ 处。下面主要处理这种左不变的过程噪声。
+其中噪声项$w$定义在李代数上，通过左乘 $x$ 作用到 $x$ 处。
 
-> 当然不排除有些系统的噪声可能是右不变的，对应方程应写为 $\dot x=f_u(x)+w.x$，后续公式的推导也需跟着适配。
+> 如果假设噪声是右不变的，对应方程应写为 $\dot x=f_u(x)+w.x$，后续公式的推导也需跟着适配。
 
 之前定义的不变状态误差 $\eta$ 是李群上的误差，不太方便操作，我们把它也转移到李代数上：
 
@@ -637,7 +638,7 @@ $\dot \eta \eta^{-1}=g_u(\eta)\eta^{-1} + \hat w=f_u(\eta)\eta^{-1}-\eta f_u(Id)
 * 如果  $f_u$本身是右不变的，$u.x:=f_u(Id).x=f_u(x)$，选用 LIEKF 时状态转移的计算会简单一些，因为 $A_u=0$;
 * 但注意，到底选择 RIEKF 还是 LIEKF，由观测模型决定：左不变观测对应 LIEKF，右不变观测对应 RIEKF；如果观测本身不具备不变性，则可考虑按上面两条来选择更方便计算的 IEKF；
 * 使用 RIEKF 时，系统演化方程$f_u$ 既可以是做不变的也可以是右不变的，甚至可以既非左不变又非右不变，只要它满足 $f_u(ab)=f_u(a)b+af_u(b)-af_u(Id)b$ 即可； LIEKF 同理。
-* 由于噪声$w$的定义是左不变的 ($x.w$)，所以对于 RIEKF，$G$ 中会出现对状态轨迹 $\hat x$  的依赖；如果噪声$w$的定义是右不变的 ($w.x$)，那么 LIFEK 的$G$ 中会出现对状态轨迹 $\hat x$  的依赖；常见的工程问题中，噪声的物理性质一般适合建模为左不变的 ($x.w$)，因为 sensor 一般都是在载体的参考系（$x$） 下作测量；
+* 由于本节噪声$w$的定义是左不变的 ($x.w$)，所以对于 RIEKF，$G$ 中会出现对状态轨迹 $\hat x$  的依赖；如果噪声$w$的定义是右不变的 ($w.x$)，那么 LIFEK 的 $G$ 中会出现对状态轨迹 $\hat x$  的依赖；过程噪声 $w$ 可以是受 $u$ 控制的 $w_u$，但不能受 $x$ 或 $\hat x$ 控制，否则，$\dot \xi$ 将依赖 $x$ 或 $\hat x$，就彻底破坏了误差演化不依赖状态轨迹的原则。
 
 ---
 ### 观测噪声的引入与观测的线性化
@@ -861,7 +862,7 @@ $\hat x_{t_n}^+=(\hat \eta^+)^{-1}  \cdot  \hat x_{t_n}=\exp(-K\tilde y_\xi) \cd
 首先，确定系统的状态量 $x$、控制量 $u$、以及演化方程 $f_u(x)$；
 然后，看是否可以在状态空间 $\mathbb X$ 上构造一个二元乘法运算，使得
 1. $\mathbb X$ 在该乘法下构成李群 $G$ （满足结合律、存在单位元、存在逆元）
-2. 且向量场 $f_u$ 是左或右不变向量场，或者满足 $f(ab)=f(a)b+af(b)+af(Id)b$
+2. 且向量场 $f_u$ 是左或右不变向量场，或者满足 $f(ab)=f(a)b+af(b)-af(Id)b$
 
 如果可以，那么可以使用 IEKF 。
 
@@ -872,40 +873,32 @@ $\hat x_{t_n}^+=(\hat \eta^+)^{-1}  \cdot  \hat x_{t_n}=\exp(-K\tilde y_\xi) \cd
 对于离散时间的 IEKF，上面的条件2对应：
 
 2. 无噪声的状态转移方程可以写为以下两种形式之一
-    - $x_{t_{n+1}}=x_{t_n}.\Gamma_u$ (对应左不变的 $f_u$) 或 
-    - $x_{t_{n+1}}=\Gamma_u.x_{t_n}$ (对应右不变的 $f_u$)
+    - $x_{n}=x_{n-1}.\Gamma_u$ (对应左不变的 $f_u$， $\dot x=f_u(x)=x.f_u(e)$) 或 
+    - $x_{n}=\Gamma_u.x_{n-1}$ (对应右不变的 $f_u$， $\dot x=f_u(x)=f_u(e).x$)
 
-其中 $\Gamma_u\in G$ 是个依赖于 $u$ 的群元。一般把 $u$ 建模为李代数上的向量，且 $\Gamma_u=\exp(u)$.
+其中 $\Gamma_u\in G$ 是个依赖于 $u$ 的群元。一般把 $u$ 建模为李代数上的向量，且 $\Gamma_u=\exp(u)$，当然这并不是必须的.
 
 > 暂不考虑一般形式（i.e. 既非左不变、又非右不变，但满足 $f(ab)=af(b)+f(a)b-af(e)b$) 的 $f_u$ 对应的离散时间版本。
 
-对于左不变 $f_u(x)$ ，并考虑左不变过程噪声 $w$，我们有：
+再来看下离散时间版本的过程噪声。这里仅以 "左不变过程+右不变误差"为例。
+对于左不变的过程，可以写成
+$x_{n}=x_{n-1}.\Gamma_{(u,w)}=x_{n-1}.(\exp(w_u).\Gamma_{u})$
+其中 $w$ 是原始噪声项，$w_u$ 是被 $u$ 变换过的左不变噪声项; 
+当使用右不变误差 $\eta=x\hat x^{-1}$ 时 ，
+$\begin{aligned}\eta_{n|n-1}&=x_{n}\hat x_{n|n-1}^{-1} \\
+&=(x_{n-1}.\exp(w_u).\Gamma_{u})(\Gamma_{u}^{-1}\hat x_{n-1|n-1}^{-1}) \\
+&=x_{n-1}.\exp(w_u).\hat x_{n-1|n-1}^{-1}\\
+&=(x_{n-1}\hat x_{n-1|n-1}^{-1})(\hat x_{n-1|n-1}\exp(w_u).\hat x_{n-1|n-1}^{-1})\\
+&=\eta_{n-1|n-1} \exp(Ad_{\hat x_{n-1|n-1}}w_u)
+\end{aligned}$
 
-$\dot x= f_u(x) + x.w = x.u_e + x.w = x.(u_e+w)$
-其中 $u_e = f_u(e)$ 是李代数上的向量，噪声 $w$ 作用在这个向量上。
-假设 $u_e$ 和 $w$ 在 $\Delta t$ 时间内保持恒定，那么
-$\exp(u_e\Delta t+w\Delta t)=\exp(J_l(u_e\Delta t)w\Delta t)\exp(u\Delta t)$
-当 $\Delta t$ 为小量时，$J_l(u_e\Delta t)\approx Id_{\mathfrak g}$，
-$\exp(u_e\Delta t+w\Delta t)\approx \exp(w\Delta t)\exp(u\Delta t)$
-
-因此，离散时间的状态转移方程为
-$$x_{t_{n+1}}=x_{t_n}.\exp((u_e+w)\Delta t)\approx x_{t_n}.\exp(w\Delta t).\exp(u_e\Delta t)$$
-
-定义离散时间的过程噪声 $w_d$ 和控制量 $u_d$ 为 $w_d=w\Delta t$ 和 $u_d = u_e\Delta t$, 那么状态转移方程可进一步简写作：
-
-$$x_{t_{n+1}}=x_{t_n}.\exp(u_d+w_d) \approx x_{t_n}.\exp(w_d).\exp(u_d)$$
-
-类似地，对于右不变的 $f_u(x)$（假设噪声$w$依然是左不变的）：
-$\begin{aligned}\dot x= f_u(x) + x.w &= u_e.x + x.w \\
-&= u_e.x + x.w.x^{-1}.x\\
-&= u_e.x + (Ad_x w).x \\
-&= (u_e+Ad_x w).x\end{aligned}$
-对应的状态转移方程为
-$$\begin{aligned}x_{t_{n+1}}&\approx \exp(u_d+Ad_{x_{t_n}}w_d).x_{t_n} \\
-&\approx \exp(u_d)\exp(Ad_{x_{t_n}}w_d).x_{t_n} \\
-&\approx \exp(u_d).x_{t_n}.\exp(w_d)\end{aligned}$$
-
-
+换算成李代数上的误差 $\xi$，得
+$\begin{aligned}\exp(\xi_{n|n-1})&=\exp(\xi_{n-1|n-1}) \exp(Ad_{x_{n-1|n-1}}w_u)
+\end{aligned}$
+略去关于误差 $\xi$ 和噪声 $w_u$ 的二阶小量（包括它们的交叉相乘项），得
+$\xi_{n|n-1} \approx \xi_{n-1|n-1} + Ad_{x_{n-1|n-1}}w_u$
+可见，$F_n=I_{\mathfrak g}$, $G_n=Ad_{x_{n-1|n-1}}.\frac{\partial w_u}{\partial w}|_{w=0}$
+如果 $w_u=w$，那么 $G_n=Ad_{x_{n-1|n-1}}$ 。
 
 #### LIEKF or RIEKF ?
 

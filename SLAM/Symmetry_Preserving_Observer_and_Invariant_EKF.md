@@ -433,7 +433,11 @@ Invariant EKF，就是通过把状态空间 $\mathbb X$与变换群等同（从�
 
 > due to the error equation of the IEKF, the Riccati equation depends on the estimate **only through the matrices Qt and Nt** which affect stability in a **minor** way, as shown by Theorem 3.
 
+
 * 如果观测函数$h(x)$没有不变性，观测误差的 jacobian 将依赖 $\hat x$：这个影响就比较大了。如果观测函数$h(x)$没有不变性，IEKF 依然可以解决 EKF 的能观性（Covariance 的一致性）问题，但收敛性就无法再被保证，因为观测误差的 jacobian 将对 $P$ 和 $K$ 产生比较显著的影响。
+
+> 可以这么理解：  Jacobian 对系统演化的影响是"方向性"的，尤其是观测 Jacobian（决定了系统的能观方向、或更新应该发生在哪个子空间上），而 Covaraince 对演化的影响只是局部性的、"步长"性的、决定了各个更新方向的权重；
+
 
 注意，在"连续时间+离散观测" 的 EKF 框架下，状态误差 $\eta$ 在 propagation 环节连续变化，在观测发生时会有个修正（跳变）。propagation 环节  $\eta$ 的演化用 $\dot \eta_{prop}$表示，严格来讲它跟之前提到的 $\dot \eta$ （连续观测框架下的估计误差的演化）有所区别，因为$\dot \eta$ 是耦合了连续的观测信息的，不仅仅是简单的 propagation 误差；但为了符号上的方便，下文依然用  $\dot \eta$ 来表示 $\dot \eta_{prop}$。
 

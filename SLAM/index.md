@@ -12,7 +12,9 @@
 
 - [First_Estimate_Jacobian](./First_Estimate_Jacobian.html)
 
-- [Invariant_EKF](Symmetry_Preserving_Observer_and_Invariant_EKF.html)
+- [Invariant EKF 理论](Symmetry_Preserving_Observer_and_Invariant_EKF.html)
+
+- [Invariat EKF for 3D SLAM](Invariat_EKF_for_3D_SLAM.html)
 
 - [Ceres中一些重要的tips](./Ceres中一些重要的tips.html)
 

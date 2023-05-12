@@ -644,6 +644,81 @@ $\dot \eta \eta^{-1}=g_u(\eta)\eta^{-1} + \hat w=f_u(\eta)\eta^{-1}-\eta f_u(Id)
 * 使用 RIEKF 时，系统演化方程$f_u$ 既可以是做不变的也可以是右不变的，甚至可以既非左不变又非右不变，只要它满足 $f_u(ab)=f_u(a)b+af_u(b)-af_u(Id)b$ 即可； LIEKF 同理。
 * 由于本节噪声$w$的定义是左不变的 ($x.w$)，所以对于 RIEKF，$G$ 中会出现对状态轨迹 $\hat x$  的依赖；如果噪声$w$的定义是右不变的 ($w.x$)，那么 LIFEK 的 $G$ 中会出现对状态轨迹 $\hat x$  的依赖；过程噪声 $w$ 可以是受 $u$ 控制的 $w_u$，但不能受 $x$ 或 $\hat x$ 控制，否则，$\dot \xi$ 将依赖 $x$ 或 $\hat x$，就彻底破坏了误差演化不依赖状态轨迹的原则。
 
+
+---
+### 离散时间过程
+
+对于离散时间过程,我们有类似的处理。
+首先定义左、右不变误差如下：
+$\eta^L=x^{-1}\hat x$ 
+$\eta^R=\hat xx^{-1}$ 
+设过程转移方程为 $x_{n+1}=f_d(x_n)$。我们希望知道当过程转移函数 $f_d$ 满足什么条件时，状态误差的传递 $\eta_n\to \eta_{n+1}$ 不依赖具体的状态值 $\hat x,x$。
+设
+$x_{n+1} = f_d(x_n), \hat x_{n+1}=f_d(\hat x_n)$
+$y_{n+1} = f_d(y_n), \hat y_{n+1}=f_d(\hat y_n)$
+这里将说明，以下 4 个命题等价：
+1. 令 $\eta^L_n=x_n^{-1}\hat x_n$，那么 $\eta^L_{n+1}=f_d(x_n)^{-1}f_d(\hat x_n)$ 的值只依赖 $\eta^L_n$，而不依赖具体的 $x_n$；
+2. 令 $\eta^R_n=\hat x_nx_n^{-1}$，那么 $\eta^R_{n+1}=f_d(\hat x_n)f_d(x_n)^{-1}$ 的值只依赖 $\eta^R_n$，而不依赖具体的 $x_n$；
+3. $f_d$ 可以写为  $f_d(x) = \phi^L(x).u^L$ 的形式，其中 $\phi^L$ 是群 $G$ 上的一个自同构；
+4. $f_d$ 可以写为  $f_d(x) = u^R.\phi^R(x)$ 的形式，其中 $\phi^L$ 是群 $G$ 上的一个自同构；
+
+首先说明 3 和 4 等价。以 $3\Rightarrow 4$ 为例：
+如果 $f_d(x) = \phi^L(x).u^L$，那么 
+$f_d(x) = u^L.(u^L)^{-1}.\phi^L(x).u^L = u^L.conj_{u^L}^{-1}(\phi^L(x)) $
+所以取 $u^R = u^L, \phi^R=conj_{u^L}^{-1}\circ \phi^L$ 即得到4的形式。 $\phi^R$ 是两个自同构的组合，所以也是个自同构。
+$4\Rightarrow 3$ 同理。
+
+再证 1 和 4 的等价性。先看 $1\Rightarrow 4$.
+由于 $\eta^L_n=x_n^{-1}\hat x_n=(e)^{-1}(x_n^{-1}\hat x_n)$，所以依假设，
+$\eta^L_{n+1}=f_d(x_n)^{-1}f_d(\hat x_n)=f_d(e)^{-1}f_d(x_n^{-1}\hat x_n)=f_d(e)^{-1}f_d(\eta^L_n)$
+
+令 $\phi(x)=f_d(e)^{-1}.f_d(x)$，那么 $f_d(x)=f_d(e).\phi(x)$；再令 $u=f_d(e)$，那 $f_d$ 就可写为 $f_d(x)=u.\phi(x)$ 的形式。下面只需再说明 $\phi$ 是群 $G$ 的一个自同构。
+把 $f_d(x)=f_d(e).\phi(x)$ 代入
+$f_d(x_n)^{-1}f_d(\hat x_n)=f_d(e)^{-1}f_d(\eta^L_n)$
+得
+$\phi(x_n)^{-1}\phi(\hat x_n)=\phi(\eta^L_n)$
+即
+$\phi(\hat x_n)=\phi(x_n)\phi(\eta^L_n)$
+由于 $\hat x_n=x_n\eta^L_n$，且 $x_n,\eta^L_n$ 是可以任意选取的，所以 $\phi$ 是 $G$ 的自同态。作为状态转移函数，$f_d$ 要求是可逆的，所以 $\phi$ 也可逆，因此$\phi$ 是 $G$ 的自同构。
+对于 $4\Rightarrow 1$，若 $f_d(x)$ 可写为 $u.\phi(x)$ 的形式，那么
+$\eta^L_{n+1}=f_d(x_n)^{-1}f_d(\hat x_n)=\phi(x_n)^{-1}\phi(\hat x_n)=\phi(x_n^{-1}\hat x_n)=\phi(\eta^L_n)$ 
+是只依赖 $\eta^L_n$的。
+
+2 与其他几条的等价性也容易证明。
+
+
+两种特例：
+- $x_{n+1}=x_{n}.\Gamma_u$ 称为左不变过程； 
+- $x_{n+1}=\Gamma_u.x_{n}$ 称为右不变过程
+
+其中 $\Gamma_u\in G$ 是个依赖于 $u$ 的群元。一般把 $u$ 建模为李代数上的向量，且 $\Gamma_u=\exp(u)$，当然这并不是必须的.
+
+#### 离散时间的过程噪声
+
+再来看下离散时间版本的过程噪声。这里仅以 "左不变过程+右不变误差"为例。
+对于左不变的过程，可以写成
+$x_{n}=x_{n-1}.\Gamma_{(u,w)}=x_{n-1}.(\exp(w_u).\Gamma_{u})$
+其中 $w$ 是原始噪声项，$w_u$ 是被 $u$ 变换过的左不变噪声项; 
+当使用右不变误差 $\eta=x\hat x^{-1}$ 时 ，
+> 注意这里用的不是 $\eta^R=\hat xx^{-1}$，而是 $\eta^R=x\hat x^{-1}$
+
+$\begin{aligned}\eta_{n|n-1}&=x_{n}\hat x_{n|n-1}^{-1} \\
+&=(x_{n-1}.\exp(w_u).\Gamma_{u})(\Gamma_{u}^{-1}\hat x_{n-1|n-1}^{-1}) \\
+&=x_{n-1}.\exp(w_u).\hat x_{n-1|n-1}^{-1}\\
+&=(x_{n-1}\hat x_{n-1|n-1}^{-1})(\hat x_{n-1|n-1}\exp(w_u).\hat x_{n-1|n-1}^{-1})\\
+&=\eta_{n-1|n-1} \exp(Ad_{\hat x_{n-1|n-1}}w_u)
+\end{aligned}$
+
+换算成李代数上的误差 $\xi$，得
+$\begin{aligned}\exp(\xi_{n|n-1})&=\exp(\xi_{n-1|n-1}) \exp(Ad_{x_{n-1|n-1}}w_u)
+\end{aligned}$
+略去关于误差 $\xi$ 和噪声 $w_u$ 的二阶小量（包括它们的交叉相乘项），得
+$\xi_{n|n-1} \approx \xi_{n-1|n-1} + Ad_{x_{n-1|n-1}}w_u$
+可见，$F_n=I_{\mathfrak g}$, $G_n=Ad_{x_{n-1|n-1}}.\frac{\partial w_u}{\partial w}|_{w=0}$
+如果 $w_u=w$，那么 $G_n=Ad_{x_{n-1|n-1}}$ 。
+
+
+
 ---
 ### 观测噪声的引入与观测的线性化
 设 $G$ 通过 
@@ -867,42 +942,10 @@ $\hat x_{t_n}^+=(\hat \eta^+)^{-1}  \cdot  \hat x_{t_n}=\exp(-K\tilde y_\xi) \cd
 然后，看是否可以在状态空间 $\mathbb X$ 上构造一个二元乘法运算，使得
 1. $\mathbb X$ 在该乘法下构成李群 $G$ （满足结合律、存在单位元、存在逆元）
 2. 且向量场 $f_u$ 是左或右不变向量场，或者满足 $f(ab)=f(a)b+af(b)-af(Id)b$
+   - 对于离散时间过程，对应的条件2是: 过程转移方程可写为 $x_{n+1}=\phi(x_n).\Gamma_u$ 的形式
+
 
 如果可以，那么可以使用 IEKF 。
-
-##### 离散时间的情况
-
-
-当 $f_u(x)$ 是左不变 $f_u(x)=xf_u(e)$ 或右不变 $f_u(x)=f_u(e)x$ 时，对应的离散时间状态转移方程也会有很简单的形式。
-对于离散时间的 IEKF，上面的条件2对应：
-
-2. 无噪声的状态转移方程可以写为以下两种形式之一
-    - $x_{n}=x_{n-1}.\Gamma_u$ (对应左不变的 $f_u$， $\dot x=f_u(x)=x.f_u(e)$) 或 
-    - $x_{n}=\Gamma_u.x_{n-1}$ (对应右不变的 $f_u$， $\dot x=f_u(x)=f_u(e).x$)
-
-其中 $\Gamma_u\in G$ 是个依赖于 $u$ 的群元。一般把 $u$ 建模为李代数上的向量，且 $\Gamma_u=\exp(u)$，当然这并不是必须的.
-
-> 暂不考虑一般形式（i.e. 既非左不变、又非右不变，但满足 $f(ab)=af(b)+f(a)b-af(e)b$) 的 $f_u$ 对应的离散时间版本。
-
-再来看下离散时间版本的过程噪声。这里仅以 "左不变过程+右不变误差"为例。
-对于左不变的过程，可以写成
-$x_{n}=x_{n-1}.\Gamma_{(u,w)}=x_{n-1}.(\exp(w_u).\Gamma_{u})$
-其中 $w$ 是原始噪声项，$w_u$ 是被 $u$ 变换过的左不变噪声项; 
-当使用右不变误差 $\eta=x\hat x^{-1}$ 时 ，
-$\begin{aligned}\eta_{n|n-1}&=x_{n}\hat x_{n|n-1}^{-1} \\
-&=(x_{n-1}.\exp(w_u).\Gamma_{u})(\Gamma_{u}^{-1}\hat x_{n-1|n-1}^{-1}) \\
-&=x_{n-1}.\exp(w_u).\hat x_{n-1|n-1}^{-1}\\
-&=(x_{n-1}\hat x_{n-1|n-1}^{-1})(\hat x_{n-1|n-1}\exp(w_u).\hat x_{n-1|n-1}^{-1})\\
-&=\eta_{n-1|n-1} \exp(Ad_{\hat x_{n-1|n-1}}w_u)
-\end{aligned}$
-
-换算成李代数上的误差 $\xi$，得
-$\begin{aligned}\exp(\xi_{n|n-1})&=\exp(\xi_{n-1|n-1}) \exp(Ad_{x_{n-1|n-1}}w_u)
-\end{aligned}$
-略去关于误差 $\xi$ 和噪声 $w_u$ 的二阶小量（包括它们的交叉相乘项），得
-$\xi_{n|n-1} \approx \xi_{n-1|n-1} + Ad_{x_{n-1|n-1}}w_u$
-可见，$F_n=I_{\mathfrak g}$, $G_n=Ad_{x_{n-1|n-1}}.\frac{\partial w_u}{\partial w}|_{w=0}$
-如果 $w_u=w$，那么 $G_n=Ad_{x_{n-1|n-1}}$ 。
 
 #### LIEKF or RIEKF ?
 

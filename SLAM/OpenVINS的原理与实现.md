@@ -58,9 +58,9 @@ DSO[4\] 的 Introduction 部分对这两类方法做了很好的综述。可概�
 # II. SLAM 状态估计：基础理论回顾
 
 
-见：
+内容较多，转移至：
 
-[http://101.43.145.52/share-plus/note/acc05f40-8502-11ec-9843-6316ea454d6a/a8782bc0-9431-45f3-bccb-f2c6ff24af0e](http://101.43.145.52/share-plus/note/acc05f40-8502-11ec-9843-6316ea454d6a/a8782bc0-9431-45f3-bccb-f2c6ff24af0e)
+[SLAM 状态估计基础理论回顾](https://newthinker-jeffrey.github.io/SLAM/SLAM%E7%8A%B6%E6%80%81%E4%BC%B0%E8%AE%A1%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%E5%9B%9E%E9%A1%BE.html)
 
 
 
@@ -291,10 +291,10 @@ $t$ 时刻的相机 pose 记为$X_t = X^C_t=X^I_{t+t_d}$，其中 $X^C_t$ 指Cam
 
 通过把 IMU 数据 propagate 到 IMU 时刻 $t+\hat t_d$ ，可以得到估计值 $\hat X_t =  \hat X^I_{t+\hat t_d}$，估计误差为
 
- $\begin{align} \tilde X_t =X^I_{t+t_d} - \hat X^I_{t+\hat t_d} & = (X^I_{t+t_d} -  X^I_{t+\hat t_d}) + ( X^I_{t+\hat t_d}-\hat X^I_{t+\hat t_d})  \\
+ $\begin{aligned} \tilde X_t =X^I_{t+t_d} - \hat X^I_{t+\hat t_d} & = (X^I_{t+t_d} -  X^I_{t+\hat t_d}) + ( X^I_{t+\hat t_d}-\hat X^I_{t+\hat t_d})  \\
 & \approx \left[\begin{matrix}v \\ \omega \end{matrix}\right](t_d-\hat t_d) + ( X^I_{t+\hat t_d}-\hat X^I_{t+\hat t_d})\\
 &=\left[\begin{matrix}v \\ \omega \end{matrix}\right]\tilde t_d + \tilde X^I_{t+\hat t_d}
-\end{align}$  
+\end{aligned}$  
 其中  $v,\omega$指 $t$ 时刻（对应 IMU 时钟 $t+t_d$）的速度和角速度，可以通过 惯性状态量 和 IMU 读数得到近似值。
 然后回顾下前面提到的基本观测模型
 

@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ------------------------------------------------------------------------
 
+## 基本信息
+
 姓名: 王志伟
 
 电话: 18701054181
@@ -20,15 +22,38 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ------------------------------------------------------------------------
 
-site: <https://newthinker-jeffrey.github.io> （这个链接里我放了些之前写过的技术博客和数学方面的笔记，以便您大概了解我理论方面的掌握程度）
+## 要点介绍
+
+-   8 年算法工程师经验，扎实的数学功底和工程能力，擅长 slam 定位和建图、多传感器融合等领域；
+
+-   重视架构设计、代码可维护性；
+
+-   曾是上市公司 九号机器人 Slam 算法团队核心成员，参与了室内配送机器人、主导了餐厅机器人等项目的算法研发。
+
+-   最近履历：
+
+    -   **九号机器人/赛格威机器人 Segway Robotics (2017.09-2023.02)**
+
+    -   **河森堡机器人 Heisenberg Robotics (2023.02-2023.07)**
 
 ------------------------------------------------------------------------
 
-最近履历：
+**一些链接**：（供技术面试官参考）
 
-**九号机器人/赛格威机器人 Segway Robotics (2017.09-2023.02)** 
+以下链接是我之前写过的一些技术博客、笔记或 talk 材料，多数偏数学和理论，放了几篇有代表性的在这里以便您大概了解我理论方面的掌握程度：
 
-**河森堡机器人 Heisenberg Robotics (2023.02-至今)**
+-   **李群李代数基本理论**: <https://newthinker-jeffrey.github.io/pure_math/Differential_Geometry/LieGroup>
+-   **不变 EKF (Invariant EKF) 理论**：<https://newthinker-jeffrey.github.io/SLAM/Symmetry_Preserving_Observer_and_Invariant_EKF.html>
+-   **SLAM 中的状态估计 (talk 材料)**： [https://newthinker-jeffrey.github.io/SLAM/SLAM状态估计基础理论回顾.html](https://newthinker-jeffrey.github.io/SLAM/SLAM状态估计基础理论回顾.html){.uri}
+-   **OpenVINS 原理与实现 (talk 材料)**： [https://newthinker-jeffrey.github.io/SLAM/OpenVINS的原理与实现.html](https://newthinker-jeffrey.github.io/SLAM/OpenVINS的原理与实现.html){.uri}
+-   **线性方程组的条件数，预条件共轭梯度法**： [https://newthinker-jeffrey.github.io/SLAM/线性方程组求解.html](https://newthinker-jeffrey.github.io/SLAM/线性方程组求解.html){.uri}
+-   **ceres 中一些重要的tips**： [https://newthinker-jeffrey.github.io/SLAM/Ceres中一些重要的tips.html](https://newthinker-jeffrey.github.io/SLAM/Ceres中一些重要的tips.html){.uri}
+-   **带约束的最优化问题 (2016年的老文章，博客，有不错的评论)**: <https://blog.csdn.net/NewThinker_wei/article/details/52857397>
+-   **粒子滤波 (2016年的老文章)**: [https://newthinker-jeffrey.github.io/old_articles_before_2017/粒子滤波.html](https://newthinker-jeffrey.github.io/old_articles_before_2017/粒子滤波.html){.uri}
+
+------------------------------------------------------------------------
+
+## 详细履历
 
 ------------------------------------------------------------------------
 
@@ -36,25 +61,29 @@ site: <https://newthinker-jeffrey.github.io> （这个链接里我放了些之�
 
 **视觉SLAM算法工程师**
 
-**2023.02-至今**
+**2023.02-2023.07**
 
 负责室外割草机器人单、双目 VIO / VI-SLAM 定位算法研发
 
-结合机器人端计算平台的算力，选择合适的 VIO 算法框架，最终选定基于滤波的方法； 以 OpenVINS 为 codebase，在草地场景数据集下进行 VIO 算法调优，优化：
+结合机器人端计算平台的算力，选择合适的 VIO 算法框架； 以 OpenVINS 为 codebase，在草地场景数据集下进行 VIO 算法调优。这段工作经历尚短，写得细些：
 
--   优化 OpenVINS 的数据流和线程：做好 feature databse 等资源的并发访问保护，支持 feature tracking 和 update 的并行，提高算法实时性；
+-   **优化 OpenVINS 的数据流和线程**： feature databse 等资源的并发访问，支持 feature tracking 和 update 的并行，提高算法实时性；
 
--   改进 OpenVINS 的 feature tracking ：加入 keypoint 预测，几何校验环节支持 two-point ransac 方法；双目 stereo 的 tracking 逻辑也做了改进；
+-   **改进 OpenVINS 的 feature tracking** ：加入 keypoint 预测，几何校验环节支持 two-point ransac 方法；双目 stereo 的 tracking 逻辑也做了改进；
 
--   提高 VIO 算法的鲁棒性：使系统在进入不稳定条件时能快速恢复（比如因机器人转身等原因 feature 突然全丢、或 VIO 初始化过程中对 bias 和初速的估计很差时等，原版算法在这些情况下经常快速跑飞）
+-   **提高 VIO 算法的鲁棒性**：使系统在进入不稳定条件时能快速恢复（比如因机器人转身等原因 feature 突然全丢、或 VIO 初始化过程中对 bias 和初速的估计很差时等，原版算法在这些情况下经常快速跑飞）
 
-    -   3D feature 的使用策略优化：基于视差排序选择最好的 feature 添加为 landmark；允许将一部分获得足够视差的 feature 立即添加为 landmark ，使得滤波器能尽早利用到视觉信息，尽量减少纯靠 IMU 积分的情况
+    -   **3D feature 的使用策略** 优化：基于视差排序选择最好的 feature 添加为 landmark；允许将一部分获得足够视差的 feature 立即添加为 landmark ，使得滤波器能尽早利用到视觉信息，尽量减少纯靠 IMU 积分的情况
 
-    -   Right Invariant EKF: OpenVINS 中采用了 FEJ 来解决 EKF 的一致性问题，但 FEJ 把线性化点固定为初始估计值的做法可能导致对观测 Jacobian H 的估计与实际有较大偏差，尤其在不稳定条件发生、初始估计较差时，这会加快系统的发散；仔细分析了一些替代方案，包括 OC-EKF，去年新发表的 FEJ2 等，最终选择了理论上最完美的 Invariant EKF 方案，并对某些细节做了改进；
+    -   **Right Invariant EKF**: OpenVINS 中采用了 FEJ 来解决 EKF 的一致性问题，但 FEJ 把线性化点固定为初始估计值的做法可能导致对观测 Jacobian H 的估计与实际有较大偏差，尤其在不稳定条件发生、初始估计较差时，这会加快系统的发散；仔细分析了一些替代方案，包括 OC-EKF，去年新发表的 FEJ2 等，最终选择了理论上更完美的 Invariant EKF 方案，并对某些细节做了改进；
 
     -   优化静态初始化环节的协方差设置；
 
 -   其他： 去boost依赖，去ros依赖; 数据集格式适配；增加 Pangolin 可视化; 封装算法接口等等；
+
+**可展示的一部分代码 diff 见** :
+
+<https://github.com/NewThinker-Jeffrey/open_vins/commit/c395bcbb909b8eb83313bd86c7036f3ab25a1677>
 
 ------------------------------------------------------------------------
 
@@ -64,17 +93,27 @@ site: <https://newthinker-jeffrey.github.io> （这个链接里我放了些之�
 
 **2017.09-2023.02**
 
-负责室内配送机器人和餐厅机器人等项目的 SLAM 算法研发，以及相关的工程化开发工作。
+主要负责室内配送机器人、餐厅机器人等项目的 SLAM 算法研发，以及相关的工程化开发工作。
 
-算法方面：
+参与项目：
 
--   **纯视觉 SLAM** ：2019前，我们的机器人采用纯视觉 SLAM 方案，整体架构大致是 VINS 前端 + maplab 后端；在检测到环境发生较大变化时，我们通过地图合并来更新地图，以保持定位地图的长期有效性；多数室内场景都可实现很好的视觉重定位效果；
+-   **室内配送机器人项目**：前期负责视觉建图、合并/更新地图模块，以及一些工程化开发；充电桩、配送站附近高精度定位（亚厘米级精度，需要精准对接充电触点和货柜）；后期负责建图和定位算法的整体维护；
+
+-   **餐厅机器人项目**：主导整个建图和定位算法的研发，以及传感器选型、联调、标定等；
+
+-   **室外车项目预研**： 室外道路场景下的视觉建图和定位方案调研，尝试过 Colmap， ORBSLAM3 等方案 （后来项目搁置）
+
+具体工作内容介绍
+
+**算法方面**：
+
+-   **纯视觉 SLAM** ：2019前，我们的配送机器人采用纯视觉 SLAM 方案，整体架构大致是 VINS 前端 + maplab 后端；在检测到环境发生较大变化时，我们通过地图合并来更新地图，以保持定位地图的长期有效性；多数室内场景都可实现很好的视觉重定位效果；
 -   **IROS 2019, Lifelong SLAM Challenge**：IROS 室内长周期 SLAM 挑战 ，所参与方案（Segway Robotics, Wheel Odometer-Enhanced VINS with Map-Based Localization）跑分排名第一（见<https://lifelong-robotic-vision.github.io/competition/SLAM.html> ），负责方案中的更新地图功能；
 -   **视觉 + lidar**：我们基于 cartographer + maplab 进行激光数据与视觉数据的紧耦合联合优化，输出具备一致坐标系的激光地图和视觉地图；通过 amcl 进行 lidar 定位；把 cartographer 的 local trajectory 部分作为 lidar odom；最后通过 msf 融合 odom、激光定位、视觉重定位等多路信息，输出连续可靠的定位结果；配合地图更新功能，地图对环境变化有很好的适应性；
 -   **二维点状视觉 tag 的设计、识别与定位**：tag 用于餐厅等高动态环境中为机器人提供稳定的视觉特征。设计新型二维点状视觉 tag（专利），并利用二维交比将图片中斑点的点位信息转化为透视不变特征，快速从环境斑点中筛选出 tag ；将 tag 作为特殊的 6DoF landmark 添加到视觉建图框架中；通过 PnP 进行 tag 定位，PnP 结果通过 ceres 做 refine 并输出 covariance 供后续 fusion 模块使用；
 -   **具备已知线条结构的充电桩、配送站附近的高效定位算法研发**：实现基于点云累积矩的快速线段检测算法；将线条结构匹配问题转化为最大完备子图 (maximum clique) 问题并通过 Bron-Kerbosch 算法搜索最佳初始匹配；基于 ceres 优化点云到线段的配准并输出定位；
 
-工程方面：
+**工程方面**：
 
 -   **多板协同**：将 SLAM 等高开销算法转移到一块单独的计算板上，以减少主板上计算资源的占用；基于 zmq 和 protobuf 实现板间实时数据交互，用 Publish & Subscribe 和 Server & Client 两种通讯模式分别做数据流和指令/响应的传输；重新设计算法 SDK，通过明确的模块划分和接口设计使得原本只支持单板模式的数据流可以兼容多板模式；
 -   **SLAM 算法批测框架，python 脚本库**：设计基于 module + pipeline 的通用 SLAM 批测框架，通过添加新 module 或拼接新的 pipeline 可以支持灵活的批测需求，同时方便测试逻辑的复用；算法运行结果多角度分析、分析结果统计与展示；支持 RPE、ATE 等常用的定位效果评价方法；该框架已长期用于各类算法的大规模批测和 CI 测试中；
@@ -108,3 +147,5 @@ site: <https://newthinker-jeffrey.github.io> （这个链接里我放了些之�
 **2010.09-2014.06**
 
 电气工程及自动化专业
+
+独立完成四旋翼飞行器的软硬件设计，包括IMU姿态解算、飞控算法、硬件电路、嵌入式和上位机软件等，获校级优秀毕设。

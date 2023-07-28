@@ -18,6 +18,8 @@
 
 - [OpenVINS的原理与实现](OpenVINS的原理与实现.html)
 
+- [RIEKF用于OpenVINS的实现思路draft](RIEKF用于OpenVINS的实现思路draft.html)
+
 - [Invariat EKF for 3D SLAM](Invariat_EKF_for_3D_SLAM.html)
 
 - [Ceres中一些重要的tips](./Ceres中一些重要的tips.html)

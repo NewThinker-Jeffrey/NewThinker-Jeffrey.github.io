@@ -20,6 +20,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 出生年月: 1992.10
 
+**简历链接**:  <https://newthinker-jeffrey.github.io/resume.html>
+
 ------------------------------------------------------------------------
 
 ## 要点介绍
